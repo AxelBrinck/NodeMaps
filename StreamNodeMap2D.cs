@@ -2,7 +2,7 @@
 
 namespace NodeMaps
 {
-    public class FileNodeMap2D : INodeMap2D
+    public class StreamNodeMap2D : INodeMap2D
     {
         private const long RootNodeAddress = 0;
         private const long Empty = -1;
@@ -10,10 +10,16 @@ namespace NodeMaps
         private readonly BinaryReader _reader;
         private readonly BinaryWriter _writer;
         private readonly Stream _stream;
+
+        private long _dataAddress;
+        private long _leftAddress;
+        private long _rightAddress;
+        private long _upAddress;
+        private long _downAddress;
         
-        public FileNodeMap2D(string path)
+        public StreamNodeMap2D(Stream stream)
         {
-            _stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            _stream = stream;
             _reader = new BinaryReader(_stream);
             _writer = new BinaryWriter(_stream);
             
@@ -21,64 +27,125 @@ namespace NodeMaps
         }
 
         public long NodeAddress { get; private set; }
-        public long DataAddress { get; set; }
-        public long LeftAddress { get; set; }
-        public long RightAddress { get; set; }
-        public long UpAddress { get; set; }
-        public long DownAddress { get; set; }
-        public long FileLength => _stream.Length;
+
+        public long DataAddress
+        {
+            get => _dataAddress;
+            set
+            {
+                _dataAddress = value;
+                WriteNode(LeftAddress, RightAddress, UpAddress, DownAddress, value, NodeAddress);
+            }
+        }
+
+        public long LeftAddress
+        {
+            get => _leftAddress;
+            set
+            {
+                _leftAddress = value;
+                WriteNode(value, RightAddress, UpAddress, DownAddress, DataAddress, NodeAddress);
+            }
+        }
+
+        public long RightAddress
+        {
+            get => _rightAddress;
+            set
+            {
+                _rightAddress = value;
+                WriteNode(LeftAddress, value, UpAddress, DownAddress, DataAddress, NodeAddress);
+            }
+        }
+
+        public long UpAddress
+        {
+            get => _upAddress;
+            set
+            {
+                _upAddress = value;
+                WriteNode(LeftAddress, RightAddress, value, DownAddress, DataAddress, NodeAddress);
+            }
+        }
+
+        public long DownAddress
+        {
+            get => _downAddress;
+            set
+            {
+                _downAddress = value;
+                WriteNode(LeftAddress, RightAddress, UpAddress, value, DataAddress, NodeAddress);
+            }
+        }
+        
+        public long StreamLength => _stream.Length;
         
         public byte[] GetData()
         {
-            throw new System.NotImplementedException();
+            if (DataAddress == Empty) return null;
+
+            _stream.Position = DataAddress;
+            
+            return _reader.ReadBytes(_reader.ReadInt16());
         }
 
         public void SetData(byte[] data)
         {
-            throw new System.NotImplementedException();
+            DataAddress = StreamLength;
+
+            _stream.Position = DataAddress;
+            
+            _writer.Write((short) data.Length);
+            _writer.Write(data);
+            _writer.Flush();
         }
         
         public void MoveLeft()
         {
             if (LeftAddress == Empty)
             {
-                var newNodeAddress = FileLength;
+                var newNodeAddress = StreamLength;
                 WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
                 LeftAddress = newNodeAddress;
             }
             
+            Goto(LeftAddress);
         }
 
         public void MoveRight()
         {
             if (RightAddress == Empty)
             {
-                var newNodeAddress = FileLength;
+                var newNodeAddress = StreamLength;
                 WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
                 RightAddress = newNodeAddress;
             }
             
+            Goto(RightAddress);
         }
 
         public void MoveUp()
         {
             if (UpAddress == Empty)
             {
-                var newNodeAddress = FileLength;
+                var newNodeAddress = StreamLength;
                 WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
                 UpAddress = newNodeAddress;
             }
             
+            Goto(UpAddress);
         }
 
         public void MoveDown()
         {
             if (DownAddress == Empty)
             {
-                var newNodeAddress = FileLength;
+                var newNodeAddress = StreamLength;
                 WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
                 DownAddress = newNodeAddress;
             }
+            
+            Goto(DownAddress);
         }
         
         public void Goto(long nodeAddress)

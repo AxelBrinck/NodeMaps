@@ -1,6 +1,6 @@
 ﻿namespace NodeMaps
 {
-    public interface INode3D
+    public interface INodeMap3D : INodeMap2D
     {
         long AheadAddress { get; set; }
         long BehindAddress { get; set; }

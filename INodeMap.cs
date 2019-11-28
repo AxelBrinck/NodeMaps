@@ -1,7 +1,11 @@
 ﻿namespace NodeMaps
 {
-    public interface INode
+    public interface INodeMap
     {
-        byte[] Data { get; set; }
+        long NodeAddress { get; }
+        long DataAddress { get; set; }
+        byte[] GetData();
+        void SetData(byte[] data);
+        void Goto(long nodeAddress);
     }
 }
