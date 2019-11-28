@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace NodeMaps
 {
@@ -82,7 +83,7 @@ namespace NodeMaps
         
         public byte[] GetData()
         {
-            if (DataAddress == Empty) return null;
+            if (DataAddress == Empty) return new byte[0];
 
             _stream.Position = DataAddress;
             
@@ -105,7 +106,7 @@ namespace NodeMaps
             if (LeftAddress == Empty)
             {
                 var newNodeAddress = StreamLength;
-                WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
+                WriteNode(Empty, NodeAddress, Empty, Empty, Empty, newNodeAddress);
                 LeftAddress = newNodeAddress;
             }
             
@@ -117,7 +118,7 @@ namespace NodeMaps
             if (RightAddress == Empty)
             {
                 var newNodeAddress = StreamLength;
-                WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
+                WriteNode(NodeAddress, Empty, Empty, Empty, Empty, newNodeAddress);
                 RightAddress = newNodeAddress;
             }
             
@@ -129,7 +130,7 @@ namespace NodeMaps
             if (UpAddress == Empty)
             {
                 var newNodeAddress = StreamLength;
-                WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
+                WriteNode(Empty, Empty, Empty, NodeAddress, Empty, newNodeAddress);
                 UpAddress = newNodeAddress;
             }
             
@@ -141,7 +142,7 @@ namespace NodeMaps
             if (DownAddress == Empty)
             {
                 var newNodeAddress = StreamLength;
-                WriteNode(Empty, Empty, Empty, Empty, Empty, newNodeAddress);
+                WriteNode(Empty, Empty, NodeAddress, Empty, Empty, newNodeAddress);
                 DownAddress = newNodeAddress;
             }
             
@@ -152,11 +153,14 @@ namespace NodeMaps
         {
             NodeAddress = nodeAddress;
             _stream.Position = nodeAddress;
-            LeftAddress = _reader.ReadInt64();
-            RightAddress = _reader.ReadInt64();
-            UpAddress = _reader.ReadInt64();
-            DownAddress = _reader.ReadInt64();
-            DataAddress = _reader.ReadInt64();
+
+            var nodeHeaderBytes = _reader.ReadBytes(sizeof(long) * 5);
+
+            _leftAddress = BitConverter.ToInt64(nodeHeaderBytes, 0);
+            _rightAddress = BitConverter.ToInt64(nodeHeaderBytes, sizeof(long) * 1);
+            _upAddress = BitConverter.ToInt64(nodeHeaderBytes, sizeof(long) * 2);
+            _downAddress = BitConverter.ToInt64(nodeHeaderBytes, sizeof(long) * 3);
+            _dataAddress = BitConverter.ToInt64(nodeHeaderBytes, sizeof(long) * 4);
         }
 
         private void Initialize()
@@ -165,20 +169,18 @@ namespace NodeMaps
             {
                 WriteNode(Empty, Empty, Empty, Empty, Empty, RootNodeAddress);
             }
-            else
-            {
-                Goto(RootNodeAddress);
-            }
+            
+            Goto(RootNodeAddress);
         }
         
-        private void WriteNode(long left, long right, long up, long down, long value, long position)
+        private void WriteNode(long left, long right, long up, long down, long data, long position)
         {
             _stream.Position = position;
             _writer.Write(left);
             _writer.Write(right);
             _writer.Write(up);
             _writer.Write(down);
-            _writer.Write(value);
+            _writer.Write(data);
             _writer.Flush();
         }
     }
