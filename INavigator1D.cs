@@ -1,6 +1,6 @@
 ﻿namespace NodeMaps
 {
-    public interface INodeCursor1D
+    public interface INavigator1D
     {
         long LeftAddress { get; set; }
         long RightAddress { get; set; }

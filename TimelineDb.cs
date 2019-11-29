@@ -5,11 +5,11 @@ namespace NodeMaps
 {
     public class TimelineDb
     {
-        private readonly INodeCursor2D _nodeCursor2D;
+        private readonly INavigator2D _navigator2D;
         
         public TimelineDb(Stream stream)
         {
-            _nodeCursor2D = new StreamNodeCursor2D(stream);
+            _navigator2D = new StreamNodeCursor2D(stream);
         }
 
         public void Add(DateTime time, string entry, string key, byte[] value)
