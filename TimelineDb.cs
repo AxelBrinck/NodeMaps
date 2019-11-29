@@ -3,11 +3,11 @@ using System.IO;
 
 namespace NodeMaps
 {
-    public class NodeDbBasicDriver
+    public class TimelineDb
     {
         private readonly INodeCursor2D _nodeCursor2D;
         
-        public NodeDbBasicDriver(Stream stream)
+        public TimelineDb(Stream stream)
         {
             _nodeCursor2D = new StreamNodeCursor2D(stream);
         }
