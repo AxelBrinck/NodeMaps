@@ -3,7 +3,7 @@ using System.IO;
 
 namespace NodeMaps
 {
-    public class StreamNodeMap2D : INodeMap2D
+    public class StreamNodeCursor2D : INodeCursor2D
     {
         private const long RootNodeAddress = 0;
         private const long Empty = -1;
@@ -18,7 +18,7 @@ namespace NodeMaps
         private long _upAddress;
         private long _downAddress;
         
-        public StreamNodeMap2D(Stream stream)
+        public StreamNodeCursor2D(Stream stream)
         {
             _stream = stream;
             _reader = new BinaryReader(_stream);

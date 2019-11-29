@@ -1,6 +1,6 @@
 ﻿namespace NodeMaps
 {
-    public interface INodeMap
+    public interface INodeCursor
     {
         long NodeAddress { get; }
         long DataAddress { get; set; }

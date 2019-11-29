@@ -4,11 +4,11 @@ namespace NodeMaps
 {
     public class NodeDbBasicDriver
     {
-        private readonly INodeMap2D _nodeMap2D;
+        private readonly INodeCursor2D _nodeCursor2D;
         
         public NodeDbBasicDriver(Stream stream)
         {
-            _nodeMap2D = new StreamNodeMap2D(stream);
+            _nodeCursor2D = new StreamNodeCursor2D(stream);
         }
     }
 }
