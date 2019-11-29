@@ -83,7 +83,7 @@ namespace NodeMaps
         
         public byte[] GetData()
         {
-            if (DataAddress == Empty) return new byte[0];
+            if (DataAddress == Empty) return null;
 
             _stream.Position = DataAddress;
             
