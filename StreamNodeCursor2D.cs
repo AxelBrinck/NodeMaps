@@ -3,6 +3,15 @@ using System.IO;
 
 namespace NodeMaps
 {
+    public interface INodeCursor
+    {
+        long NodeAddress { get; }
+        long DataAddress { get; set; }
+        byte[] GetData();
+        void SetData(byte[] data);
+        void Goto(long nodeAddress);
+    }
+    
     public interface INavigator1D
     {
         long LeftAddress { get; set; }
