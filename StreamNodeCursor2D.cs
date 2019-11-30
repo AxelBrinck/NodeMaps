@@ -3,6 +3,7 @@ using System.IO;
 
 namespace NodeMaps
 {
+    [Obsolete("Working but, Improved version being created that will lead this format incompatible.")]
     public class StreamNodeCursor2D : INavigator2D, INodeCursor
     {
         private const long RootNodeAddress = 0;
