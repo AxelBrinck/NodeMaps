@@ -3,6 +3,33 @@ using System.IO;
 
 namespace NodeMaps
 {
+    public interface INavigator1D
+    {
+        long LeftAddress { get; set; }
+        long RightAddress { get; set; }
+
+        void MoveLeft();
+        void MoveRight();
+    }
+    
+    public interface INavigator2D : INavigator1D
+    {
+        long UpAddress { get; set; }
+        long DownAddress { get; set; }
+
+        void MoveUp();
+        void MoveDown();
+    }
+    
+    public interface INavigator3D : INavigator2D
+    {
+        long AheadAddress { get; set; }
+        long BehindAddress { get; set; }
+
+        void MoveAhead();
+        void MoveBehind();
+    }
+    
     [Obsolete("Working but, Improved version being created that will lead this format incompatible.")]
     public class StreamNodeCursor2D : INavigator2D, INodeCursor
     {
