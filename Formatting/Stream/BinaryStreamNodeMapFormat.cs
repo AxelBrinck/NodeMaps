@@ -11,13 +11,13 @@ namespace NodeMaps.Formatting.Stream
         {
             get
             {
-                Stream.Position = CurrentNode.Data;
+                Stream.Position = CurrentNode.DataId;
                 var length = Reader.ReadInt16();
                 return Reader.ReadBytes(length);
             }
             set
             {
-                Stream.Position = CurrentNode.Data;
+                Stream.Position = CurrentNode.DataId;
                 Writer.Write((short) value.Length);
                 Writer.Write(value);
                 Writer.Flush();
@@ -41,13 +41,13 @@ namespace NodeMaps.Formatting.Stream
         protected override void WriteNodeToAddress(long address, Node node)
         {
             Stream.Position = address;
-            Writer.Write(node.Data);
-            Writer.Write(node.Left);
-            Writer.Write(node.Right);
-            Writer.Write(node.Up);
-            Writer.Write(node.Down);
-            Writer.Write(node.Front);
-            Writer.Write(node.Back);
+            Writer.Write(node.DataId);
+            Writer.Write(node.LeftId);
+            Writer.Write(node.RightId);
+            Writer.Write(node.UpId);
+            Writer.Write(node.DownId);
+            Writer.Write(node.FrontId);
+            Writer.Write(node.BackId);
             Writer.Flush();
         }
 

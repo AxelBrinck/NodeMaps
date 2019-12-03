@@ -37,38 +37,38 @@ namespace NodeMaps.Formatting.Stream
 
         public Node LeftNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Left);
-            set => WriteNodeToAddress(CurrentNode.Left, value);
+            get => ReadNodeFromAddress(CurrentNode.LeftId);
+            set => WriteNodeToAddress(CurrentNode.LeftId, value);
         }
         
         public Node RightNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Right);
-            set => WriteNodeToAddress(CurrentNode.Right, value);
+            get => ReadNodeFromAddress(CurrentNode.RightId);
+            set => WriteNodeToAddress(CurrentNode.RightId, value);
         }
         
         public Node UpNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Up);
-            set => WriteNodeToAddress(CurrentNode.Up, value);
+            get => ReadNodeFromAddress(CurrentNode.UpId);
+            set => WriteNodeToAddress(CurrentNode.UpId, value);
         }
         
         public Node DownNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Down);
-            set => WriteNodeToAddress(CurrentNode.Down, value);
+            get => ReadNodeFromAddress(CurrentNode.DownId);
+            set => WriteNodeToAddress(CurrentNode.DownId, value);
         }
         
         public Node FrontNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Front);
-            set => WriteNodeToAddress(CurrentNode.Front, value);
+            get => ReadNodeFromAddress(CurrentNode.FrontId);
+            set => WriteNodeToAddress(CurrentNode.FrontId, value);
         }
         
         public Node BackNode
         {
-            get => ReadNodeFromAddress(CurrentNode.Back);
-            set => WriteNodeToAddress(CurrentNode.Back, value);
+            get => ReadNodeFromAddress(CurrentNode.BackId);
+            set => WriteNodeToAddress(CurrentNode.BackId, value);
         }
         
         public abstract T Data { get; set; }
