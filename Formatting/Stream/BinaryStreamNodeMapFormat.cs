@@ -51,6 +51,40 @@ namespace NodeMaps.Formatting.Stream
             Writer.Flush();
         }
 
-        
+        protected override void SetLeftNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 0;
+            Writer.Write(id);
+        }
+
+        protected override void SetRightNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 1;
+            Writer.Write(id);
+        }
+
+        protected override void SetUpNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 2;
+            Writer.Write(id);
+        }
+
+        protected override void SetDownNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 3;
+            Writer.Write(id);
+        }
+
+        protected override void SetFrontNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 4;
+            Writer.Write(id);
+        }
+
+        protected override void SetBackNodeId(long id)
+        {
+            Stream.Position += sizeof(long) * 5;
+            Writer.Write(id);
+        }
     }
 }

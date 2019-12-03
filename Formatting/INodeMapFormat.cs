@@ -6,13 +6,12 @@ namespace NodeMaps.Formatting
     {
         long Id { get; set; }
         Node CurrentNode { get; set; }
-/**
-Node LeftNode { get; set; }
-Node RightNode { get; set; }
-Node UpNode { get; set; }
-Node DownNode { get; set; }
-Node FrontNode { get; set; }
-Node BackNode { get; set; }*/
+        long LeftNodeId { get; set; }
+        long RightNodeId { get; set; }
+        long UpNodeId { get; set; }
+        long DownNodeId { get; set; }
+        long FrontNodeId { get; set; }
+        long BackNodeId { get; set; }
         T Data { get; set; }
         long GetEmptyId();
     }

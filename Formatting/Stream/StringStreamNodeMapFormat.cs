@@ -47,5 +47,35 @@ namespace NodeMaps.Formatting.Stream
             Writer.Write(node.BackId.ToString());
             Writer.Flush();
         }
+
+        protected override void SetLeftNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void SetRightNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void SetUpNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void SetDownNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void SetFrontNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void SetBackNodeId(long id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

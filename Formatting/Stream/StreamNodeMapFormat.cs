@@ -35,44 +35,91 @@ namespace NodeMaps.Formatting.Stream
             get => _currentNode ??= ReadNodeFromAddress(Id);
             set => WriteNodeToAddress(Id, value);
         }
-        
-        /**
-        public Node LeftNode
+
+        public long LeftNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.LeftId);
-            set => WriteNodeToAddress(CurrentNode.LeftId, value);
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.LeftId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetLeftNodeId(value);
+            }
         }
-        
-        public Node RightNode
+
+        public long RightNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.RightId);
-            set => WriteNodeToAddress(CurrentNode.RightId, value);
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.RightId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetRightNodeId(value);
+            }
         }
-        
-        public Node UpNode
+
+        public long UpNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.UpId);
-            set => WriteNodeToAddress(CurrentNode.UpId, value);
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.UpId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetUpNodeId(value);
+            }
         }
-        
-        public Node DownNode
+
+        public long DownNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.DownId);
-            set => WriteNodeToAddress(CurrentNode.DownId, value);
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.DownId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetDownNodeId(value);
+            }
         }
-        
-        public Node FrontNode
+
+        public long FrontNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.FrontId);
-            set => WriteNodeToAddress(CurrentNode.FrontId, value);
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.FrontId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetFrontNodeId(value);
+            }
         }
-        
-        public Node BackNode
+
+        public long BackNodeId
         {
-            get => ReadNodeFromAddress(CurrentNode.BackId);
-            set => WriteNodeToAddress(CurrentNode.BackId, value);
-        }**/
-        
+            get
+            {
+                if (_currentNode == null) ReadNodeFromAddress(Id);
+                return _currentNode.BackId;
+            }
+            set
+            {
+                Stream.Position = Id;
+                SetBackNodeId(value);
+            }
+        }
+
         public long GetEmptyId()
         {
             return Stream.Length;
@@ -82,5 +129,11 @@ namespace NodeMaps.Formatting.Stream
 
         protected abstract Node ReadNodeFromAddress(long address);
         protected abstract void WriteNodeToAddress(long address, Node node);
+        protected abstract void SetLeftNodeId(long id);
+        protected abstract void SetRightNodeId(long id);
+        protected abstract void SetUpNodeId(long id);
+        protected abstract void SetDownNodeId(long id);
+        protected abstract void SetFrontNodeId(long id);
+        protected abstract void SetBackNodeId(long id);
     }
 }
