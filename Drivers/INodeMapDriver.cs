@@ -2,7 +2,7 @@
 
 namespace NodeMaps.Drivers
 {
-    public interface INodeMapDriver
+    public interface INodeMapDriver<T>
     {
         long Address { get; set; }
         Node CurrentNode { get; set; }
@@ -12,5 +12,6 @@ namespace NodeMaps.Drivers
         Node DownNode { get; set; }
         Node FrontNode { get; set; }
         Node BackNode { get; set; }
+        T Data { get; set; }
     }
 }

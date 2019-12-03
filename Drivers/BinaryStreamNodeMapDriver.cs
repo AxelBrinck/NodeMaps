@@ -3,7 +3,7 @@ using NodeMaps.Entities;
 
 namespace NodeMaps.Drivers
 {
-    public class BinaryStreamNodeMapDriver : INodeMapDriver
+    public class BinaryStreamNodeMapDriver : INodeMapDriver<byte[]>
     {
         private readonly Stream _stream;
         private readonly BinaryReader _reader;
@@ -70,7 +70,24 @@ namespace NodeMaps.Drivers
             get => ReadNodeFromAddress(CurrentNode.Back);
             set => WriteNodeToAddress(CurrentNode.Back, value);
         }
-        
+
+        public byte[] Data
+        {
+            get
+            {
+                _stream.Position = CurrentNode.Data;
+                var length = _reader.ReadInt16();
+                return _reader.ReadBytes(length);
+            }
+            set
+            {
+                _stream.Position = CurrentNode.Data;
+                _writer.Write((short) value.Length);
+                _writer.Write(value);
+                _writer.Flush();
+            }
+        }
+
         private Node ReadNodeFromAddress(long address)
         {
             _stream.Position = address;
