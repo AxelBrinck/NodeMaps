@@ -5,7 +5,7 @@
     /// </summary>
     public class Node
     {
-        public long Address { get; }
+        public long Id { get; }
         public long Data { get; }
         public long Left { get; }
         public long Right { get; }
@@ -14,9 +14,9 @@
         public long Front { get; }
         public long Back { get; }
 
-        public Node(long address, long data, long left, long right, long up, long down, long front, long back)
+        public Node(long id, long data, long left, long right, long up, long down, long front, long back)
         {
-            Address = address;
+            Id = id;
             Data = data;
             Left = left;
             Right = right;

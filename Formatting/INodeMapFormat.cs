@@ -4,7 +4,7 @@ namespace NodeMaps.Formatting
 {
     public interface INodeMapFormat<T>
     {
-        long Address { get; set; }
+        long Id { get; set; }
         Node CurrentNode { get; set; }
         Node LeftNode { get; set; }
         Node RightNode { get; set; }
