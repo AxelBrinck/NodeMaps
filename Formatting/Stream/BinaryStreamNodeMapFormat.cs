@@ -30,6 +30,22 @@ namespace NodeMaps.Formatting.Stream
         {
             Stream.Position = CurrentId;
 
+            OffsetToPointerNodeId(direction);
+
+            return Reader.ReadInt64();
+        }
+
+        public override void SetTargetNodeId(Direction direction, long nodeId)
+        {
+            Stream.Position = CurrentId;
+
+            OffsetToPointerNodeId(direction);
+
+            Writer.Write(nodeId);
+        }
+
+        private void OffsetToPointerNodeId(Direction direction)
+        {
             Stream.Position += direction switch
             {
                 Direction.Left => (sizeof(long) * 1),
@@ -40,15 +56,6 @@ namespace NodeMaps.Formatting.Stream
                 Direction.Back => (sizeof(long) * 6),
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
-
-            return Reader.ReadInt64();
-        }
-
-        public override void SetTargetNodeId(Direction direction, long nodeId)
-        {
-            Stream.Position = CurrentId;
-            
-            throw new System.NotImplementedException();
         }
     }
 }
