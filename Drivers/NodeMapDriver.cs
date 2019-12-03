@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using NodeMaps.Entities;
 using NodeMaps.Formatting;
 
@@ -35,6 +35,29 @@ namespace NodeMaps.Drivers
             _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), sourceId);
             GotoNodeId(sourceId);
             _format.SetTargetNodeId(direction, createdId);
+        }
+
+        public void IntercalateNewNode(Direction direction)
+        {
+            var sourceId = _format.CurrentId;
+            var finalId = _format.GetTargetNodeId(direction);
+            var intermediateId = _format.CreateEmptyNode();
+            _format.SetTargetNodeId(direction, finalId);
+            _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), sourceId);
+            GotoNodeId(finalId);
+            _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), intermediateId);
+            GotoNodeId(finalId);
+            _format.SetTargetNodeId(direction, intermediateId);
+        }
+
+        public void Link(Direction direction, long targetNode)
+        {
+            _format.SetTargetNodeId(direction, targetNode);
+        }
+
+        public void Unlink(Direction direction)
+        {
+            _format.SetTargetNodeId(direction, -1);
         }
     }
 }
