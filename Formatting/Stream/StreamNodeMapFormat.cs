@@ -16,14 +16,17 @@ namespace NodeMaps.Formatting.Stream
             Writer = new BinaryWriter(Stream);
         }
         
-        public long Id { get; set; }
-        
-        public long GetEmptyId()
-        {
-            return Stream.Length;
-        }
-        
-        public abstract T Data { get; set; }
+        public long CurrentId { get; private set; }
+        public abstract void GotoId(long id);
 
+        public abstract T GetData();
+
+        public abstract void SetData(T data);
+
+        public abstract long GetTargetNodeId(Direction direction);
+
+        public abstract void SetTargetNodeId(Direction direction, long nodeId);
+
+        public long GetEmptyId() => Stream.Length;
     }
 }
