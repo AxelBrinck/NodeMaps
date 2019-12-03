@@ -1,4 +1,4 @@
-﻿namespace NodeMaps
+﻿namespace NodeMaps.Entities
 {
     /// <summary>
     /// Describes a single node with all its attributes.
