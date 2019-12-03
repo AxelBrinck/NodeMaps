@@ -6,134 +6,103 @@ namespace NodeMaps.Drivers
     public class NodeMapDriver<T>
     {
         private readonly INodeMapFormat<T> _format;
-
-        private void Move(long id)
-        {
-            _format.Id = id;
-            CurrentNode = _format.CurrentNode;
-        }
-
+        
         public NodeMapDriver(INodeMapFormat<T> format)
         {
             _format = format;
             _format.Id = 0;
-            CurrentNode = _format.CurrentNode;
         }
-        
-        public Node CurrentNode { get; private set; }
+
+        public Node CurrentNode => _format.CurrentNode;
 
         public void MoveLeft()
         {
-            Move(CurrentNode.LeftId);
+            _format.Id = CurrentNode.LeftId;
         }
 
         public void MoveRight()
         {
-            Move(CurrentNode.RightId);
+            _format.Id = CurrentNode.RightId;
         }
 
         public void MoveUp()
         {
-            Move(CurrentNode.UpId);
+            _format.Id = CurrentNode.UpId;
         }
 
         public void MoveDown()
         {
-            Move(CurrentNode.DownId);
+            _format.Id = CurrentNode.DownId;
         }
 
         public void MoveFront()
         {
-            Move(CurrentNode.FrontId);
+            _format.Id = CurrentNode.FrontId;
         }
 
         public void MoveBack()
         {
-            Move(CurrentNode.BackId);
+            _format.Id = CurrentNode.BackId;
         }
 
-        public void CreateNodeLeft(Node node)
+        public void CreateNodeLeft()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                node.Id,
-                CurrentNode.RightId,
-                CurrentNode.UpId,
-                CurrentNode.DownId,
-                CurrentNode.FrontId,
-                CurrentNode.BackId);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.LeftNodeId = newAddress;
+            var node = new Node(newAddress, -1, -1, _format.Id, -1, -1, -1, -1);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
-        public void CreateNodeRight(Node node)
+        public void CreateNodeRight()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                CurrentNode.LeftId,
-                node.Id,
-                CurrentNode.UpId,
-                CurrentNode.DownId,
-                CurrentNode.FrontId,
-                CurrentNode.BackId);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.RightNodeId = newAddress;
+            var node = new Node(newAddress, -1, _format.Id, -1, -1, -1, -1, -1);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
-        public void CreateNodeUp(Node node)
+        public void CreateNodeUp()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                CurrentNode.LeftId,
-                CurrentNode.RightId,
-                node.Id,
-                CurrentNode.DownId,
-                CurrentNode.FrontId,
-                CurrentNode.BackId);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.UpNodeId = newAddress;
+            var node = new Node(newAddress, -1, -1, -1, -1, _format.Id, -1, -1);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
-        public void CreateNodeDown(Node node)
+        public void CreateNodeDown()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                CurrentNode.LeftId,
-                CurrentNode.RightId,
-                CurrentNode.UpId,
-                node.Id,
-                CurrentNode.FrontId,
-                CurrentNode.BackId);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.DownNodeId = newAddress;
+            var node = new Node(newAddress, -1, -1, -1, _format.Id, -1, -1, -1);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
-        public void CreateNodeFront(Node node)
+        public void CreateNodeFront()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                CurrentNode.LeftId,
-                CurrentNode.RightId,
-                CurrentNode.UpId,
-                CurrentNode.DownId,
-                node.Id,
-                CurrentNode.BackId);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.FrontNodeId = newAddress;
+            var node = new Node(newAddress, -1, -1, -1, -1, -1, -1, _format.Id);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
-        public void CreateNodeBack(Node node)
+        public void CreateNodeBack()
         {
-            CurrentNode = new Node(
-                CurrentNode.Id,
-                CurrentNode.DataId,
-                CurrentNode.LeftId,
-                CurrentNode.RightId,
-                CurrentNode.UpId,
-                CurrentNode.DownId,
-                CurrentNode.FrontId,
-                node.Id);
-            _format.CurrentNode = CurrentNode;
+            var oldAddress = CurrentNode.Id;
+            var newAddress =  _format.GetEmptyId();
+            _format.BackNodeId = newAddress;
+            var node = new Node(newAddress, -1, -1, -1, -1, -1, _format.Id, -1);
+            _format.CurrentNode = node;
+            _format.Id = oldAddress;
         }
 
         public void DeleteNodeLeft()
