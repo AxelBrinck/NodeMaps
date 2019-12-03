@@ -1,8 +1,8 @@
 ﻿using NodeMaps.Entities;
 
-namespace NodeMaps.Interpreters
+namespace NodeMaps.Drivers
 {
-    public interface INodeMapInterpreter
+    public interface INodeMapDriver
     {
         long Address { get; set; }
         Node CurrentNode { get; set; }
