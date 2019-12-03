@@ -7,7 +7,11 @@ namespace NodeMaps.Formatting.Stream
     {
         public BinaryStreamNodeMapFormat(System.IO.Stream stream) : base(stream) { }
 
-        public override void GotoId(long id) => Stream.Position = id;
+        public override void GotoNodeId(long id)
+        {
+            Stream.Position = id;
+            CurrentId = id;
+        }
 
         public override byte[] GetData()
         {
@@ -19,7 +23,7 @@ namespace NodeMaps.Formatting.Stream
         public override void SetData(byte[] data)
         {
             Stream.Position = CurrentId;
-            var newDataPosition = GetEmptyId();
+            var newDataPosition = Stream.Length;
             Writer.Write(newDataPosition);
             Stream.Position = newDataPosition;
             Writer.Write((short) data.Length);
@@ -42,6 +46,21 @@ namespace NodeMaps.Formatting.Stream
             OffsetToPointerNodeId(direction);
 
             Writer.Write(nodeId);
+            Writer.Flush();
+        }
+
+        public override long CreateEmptyNode()
+        {
+            GotoNodeId(Stream.Length);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Write((long) -1);
+            Writer.Flush();
+            return CurrentId;
         }
 
         private void OffsetToPointerNodeId(Direction direction)

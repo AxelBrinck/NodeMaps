@@ -16,8 +16,8 @@ namespace NodeMaps.Formatting.Stream
             Writer = new BinaryWriter(Stream);
         }
         
-        public long CurrentId { get; private set; }
-        public abstract void GotoId(long id);
+        public long CurrentId { get; protected set; }
+        public abstract void GotoNodeId(long id);
 
         public abstract T GetData();
 
@@ -27,6 +27,6 @@ namespace NodeMaps.Formatting.Stream
 
         public abstract void SetTargetNodeId(Direction direction, long nodeId);
 
-        public long GetEmptyId() => Stream.Length;
+        public abstract long CreateEmptyNode();
     }
 }
