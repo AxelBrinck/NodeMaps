@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NodeMaps.Entities;
+﻿using NodeMaps.Entities;
 
 namespace NodeMaps.Formatting.Stream
 {
