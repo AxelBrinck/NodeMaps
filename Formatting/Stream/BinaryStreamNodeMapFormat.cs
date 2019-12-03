@@ -1,18 +1,18 @@
 ﻿using System.IO;
 using NodeMaps.Entities;
 
-namespace NodeMaps.Formatting
+namespace NodeMaps.Formatting.Stream
 {
     public class BinaryStreamNodeMapFormat : INodeMapFormat<byte[]>
     {
-        private readonly Stream _stream;
+        private readonly System.IO.Stream _stream;
         private readonly BinaryReader _reader;
         private readonly BinaryWriter _writer;
 
         private long _currentAddress;
         private Node _currentNode;
         
-        public BinaryStreamNodeMapFormat(Stream stream)
+        public BinaryStreamNodeMapFormat(System.IO.Stream stream)
         {
             _stream = stream;
             _reader = new BinaryReader(_stream);
