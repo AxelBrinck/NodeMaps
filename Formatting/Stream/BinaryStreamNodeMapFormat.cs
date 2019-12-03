@@ -1,4 +1,5 @@
-﻿using NodeMaps.Entities;
+﻿using System;
+using NodeMaps.Entities;
 
 namespace NodeMaps.Formatting.Stream
 {
@@ -28,8 +29,19 @@ namespace NodeMaps.Formatting.Stream
         public override long GetTargetNodeId(Direction direction)
         {
             Stream.Position = CurrentId;
-            
-            throw new System.NotImplementedException();
+
+            Stream.Position += direction switch
+            {
+                Direction.Left => (sizeof(long) * 1),
+                Direction.Right => (sizeof(long) * 2),
+                Direction.Up => (sizeof(long) * 3),
+                Direction.Down => (sizeof(long) * 4),
+                Direction.Front => (sizeof(long) * 5),
+                Direction.Back => (sizeof(long) * 6),
+                _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
+            };
+
+            return Reader.ReadInt64();
         }
 
         public override void SetTargetNodeId(Direction direction, long nodeId)
