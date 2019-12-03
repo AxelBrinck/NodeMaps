@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NodeMaps.Entities;
 using NodeMaps.Formatting;
 
@@ -30,11 +30,10 @@ namespace NodeMaps.Drivers
 
         public void CreateNode(Direction direction)
         {
-            var opposite = DirectionTools.GetOpposite(direction);
-            var currentId = _format.CurrentId;
+            var sourceId = _format.CurrentId;
             var createdId = _format.CreateEmptyNode();
-            _format.SetTargetNodeId(opposite, currentId);
-            _format.GotoNodeId(currentId);
+            _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), sourceId);
+            GotoNodeId(sourceId);
             _format.SetTargetNodeId(direction, createdId);
         }
     }
