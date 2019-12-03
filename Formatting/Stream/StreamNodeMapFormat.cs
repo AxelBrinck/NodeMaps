@@ -9,7 +9,7 @@ namespace NodeMaps.Formatting.Stream
         protected readonly BinaryReader Reader;
         protected readonly BinaryWriter Writer;
 
-        public StreamNodeMapFormat(System.IO.Stream stream)
+        protected StreamNodeMapFormat(System.IO.Stream stream)
         {
             Stream = stream;
             Reader = new BinaryReader(Stream);
