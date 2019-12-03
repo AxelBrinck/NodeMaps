@@ -22,7 +22,9 @@ namespace NodeMaps.Formatting.Stream
         public override byte[] GetData()
         {
             Stream.Position = CurrentId;
-            Stream.Position = Reader.ReadInt64();
+            var dataPos = Reader.ReadInt64();
+            if (dataPos == -1) return null;
+            Stream.Position = dataPos;
             return Reader.ReadBytes(Reader.ReadInt16());
         }
 
