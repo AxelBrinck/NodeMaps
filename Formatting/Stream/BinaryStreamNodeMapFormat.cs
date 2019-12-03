@@ -34,6 +34,7 @@ namespace NodeMaps.Formatting.Stream
             Stream.Position = newDataPosition;
             Writer.Write((short) data.Length);
             Writer.Write(data);
+            Writer.Flush();
         }
 
         public override long GetTargetNodeId(Direction direction)
