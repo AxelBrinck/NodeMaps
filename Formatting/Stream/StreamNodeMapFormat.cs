@@ -10,7 +10,6 @@ namespace NodeMaps.Formatting.Stream
         protected readonly BinaryWriter Writer;
 
         private long _currentId;
-        private Node _currentNode;
         
         public StreamNodeMapFormat(System.IO.Stream stream)
         {
@@ -22,27 +21,19 @@ namespace NodeMaps.Formatting.Stream
         public long Id
         {
             get => _currentId;
-            set
-            {
-                _currentNode = null;
-                _currentId = value;
-            }
+            set => _currentId = value;
         }
 
         
         public Node CurrentNode
         {
-            get => _currentNode ??= ReadNodeFromAddress(Id);
+            get => ReadNodeFromAddress(Id);
             set => WriteNodeToAddress(Id, value);
         }
 
         public long LeftNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.LeftId;
-            }
+            get => ReadNodeFromAddress(Id).LeftId;
             set
             {
                 Stream.Position = Id;
@@ -52,11 +43,7 @@ namespace NodeMaps.Formatting.Stream
 
         public long RightNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.RightId;
-            }
+            get => ReadNodeFromAddress(Id).RightId;
             set
             {
                 Stream.Position = Id;
@@ -66,11 +53,7 @@ namespace NodeMaps.Formatting.Stream
 
         public long UpNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.UpId;
-            }
+            get => ReadNodeFromAddress(Id).UpId;
             set
             {
                 Stream.Position = Id;
@@ -80,11 +63,7 @@ namespace NodeMaps.Formatting.Stream
 
         public long DownNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.DownId;
-            }
+            get => ReadNodeFromAddress(Id).DownId;
             set
             {
                 Stream.Position = Id;
@@ -94,11 +73,7 @@ namespace NodeMaps.Formatting.Stream
 
         public long FrontNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.FrontId;
-            }
+            get => ReadNodeFromAddress(Id).FrontId;
             set
             {
                 Stream.Position = Id;
@@ -108,11 +83,7 @@ namespace NodeMaps.Formatting.Stream
 
         public long BackNodeId
         {
-            get
-            {
-                if (_currentNode == null) ReadNodeFromAddress(Id);
-                return _currentNode.BackId;
-            }
+            get => ReadNodeFromAddress(Id).BackId;
             set
             {
                 Stream.Position = Id;
