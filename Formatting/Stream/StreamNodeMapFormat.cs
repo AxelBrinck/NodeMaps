@@ -3,7 +3,7 @@ using NodeMaps.Entities;
 
 namespace NodeMaps.Formatting.Stream
 {
-    public abstract class StreamNodeMapFormat<T>
+    public abstract class StreamNodeMapFormat<T> : INodeMapFormat<T>
     {
         protected readonly System.IO.Stream Stream;
         protected readonly BinaryReader Reader;
@@ -72,6 +72,11 @@ namespace NodeMaps.Formatting.Stream
             get => ReadNodeFromAddress(CurrentNode.BackId);
             set => WriteNodeToAddress(CurrentNode.BackId, value);
         }**/
+        
+        public long GetEmptyId()
+        {
+            return Stream.Length;
+        }
         
         public abstract T Data { get; set; }
 

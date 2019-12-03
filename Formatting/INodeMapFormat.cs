@@ -14,5 +14,6 @@ Node DownNode { get; set; }
 Node FrontNode { get; set; }
 Node BackNode { get; set; }*/
         T Data { get; set; }
+        long GetEmptyId();
     }
 }
