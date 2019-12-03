@@ -18,6 +18,8 @@ namespace NodeMaps.Drivers
 
         public T GetData() => _format.GetData();
 
+        public void SetData(T data) => _format.SetData(data);
+
         public void Move(Direction direction, bool force = false)
         {
             if (force && _format.GetTargetNodeId(direction) == -1)
