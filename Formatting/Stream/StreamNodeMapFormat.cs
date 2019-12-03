@@ -29,12 +29,14 @@ namespace NodeMaps.Formatting.Stream
             }
         }
 
+        
         public Node CurrentNode
         {
             get => _currentNode ??= ReadNodeFromAddress(Id);
             set => WriteNodeToAddress(Id, value);
         }
-
+        
+        /**
         public Node LeftNode
         {
             get => ReadNodeFromAddress(CurrentNode.LeftId);
@@ -69,7 +71,7 @@ namespace NodeMaps.Formatting.Stream
         {
             get => ReadNodeFromAddress(CurrentNode.BackId);
             set => WriteNodeToAddress(CurrentNode.BackId, value);
-        }
+        }**/
         
         public abstract T Data { get; set; }
 
