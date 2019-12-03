@@ -11,7 +11,6 @@ namespace NodeMaps.Formatting.Stream
         public override byte[] GetData()
         {
             Stream.Position = CurrentId;
-            Stream.Position += sizeof(long);
             Stream.Position = Reader.ReadInt64();
             return Reader.ReadBytes(Reader.ReadInt16());
         }
@@ -19,8 +18,11 @@ namespace NodeMaps.Formatting.Stream
         public override void SetData(byte[] data)
         {
             Stream.Position = CurrentId;
-            
-            throw new System.NotImplementedException();
+            var newDataPosition = GetEmptyId();
+            Writer.Write(newDataPosition);
+            Stream.Position = newDataPosition;
+            Writer.Write((short) data.Length);
+            Writer.Write(data);
         }
 
         public override long GetTargetNodeId(Direction direction)
