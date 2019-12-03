@@ -165,34 +165,58 @@ namespace NodeMaps.Drivers
             
         }
 
-        public void LinkLeft(Node node)
+        public void LinkLeft(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.LeftNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.RightNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
-        public void LinkRight(Node node)
+        public void LinkRight(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.RightNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.LeftNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
-        public void LinkUp(Node node)
+        public void LinkUp(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.UpNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.DownNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
-        public void LinkDown(Node node)
+        public void LinkDown(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.DownNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.UpNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
-        public void LinkFront(Node node)
+        public void LinkFront(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.FrontNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.BackNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
-        public void LinkBack(Node node)
+        public void LinkBack(Node target)
         {
-            
+            var sourceId = _format.Id;
+            _format.BackNodeId = target.Id;
+            _format.CurrentNode = target;
+            _format.FrontNodeId = sourceId;
+            _format.Id = sourceId;
         }
 
         public void UnlinkLeft()
