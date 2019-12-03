@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using NodeMaps.Entities;
 
-namespace NodeMaps.Drivers
+namespace NodeMaps.Formatting
 {
-    public class BinaryStreamNodeMapDriver : INodeMapDriver<byte[]>
+    public class BinaryStreamNodeMapFormat : INodeMapFormat<byte[]>
     {
         private readonly Stream _stream;
         private readonly BinaryReader _reader;
@@ -12,7 +12,7 @@ namespace NodeMaps.Drivers
         private long _currentAddress;
         private Node _currentNode;
         
-        public BinaryStreamNodeMapDriver(Stream stream)
+        public BinaryStreamNodeMapFormat(Stream stream)
         {
             _stream = stream;
             _reader = new BinaryReader(_stream);
