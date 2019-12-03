@@ -3,9 +3,15 @@ using NodeMaps.Entities;
 
 namespace NodeMaps.Formatting.Stream
 {
-    public class BinaryStreamNodeMapFormat : StreamNodeMapFormat<byte[]>
+    public sealed class BinaryStreamNodeMapFormat : StreamNodeMapFormat<byte[]>
     {
-        public BinaryStreamNodeMapFormat(System.IO.Stream stream) : base(stream) { }
+        public BinaryStreamNodeMapFormat(System.IO.Stream stream) : base(stream)
+        {
+            if (Stream.Length == 0)
+            {
+                CreateEmptyNode();
+            }
+        }
 
         public override void GotoNodeId(long id)
         {
