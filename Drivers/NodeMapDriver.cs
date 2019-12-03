@@ -54,32 +54,86 @@ namespace NodeMaps.Drivers
 
         public void CreateNodeLeft(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                node.Id,
+                CurrentNode.RightId,
+                CurrentNode.UpId,
+                CurrentNode.DownId,
+                CurrentNode.FrontId,
+                CurrentNode.BackId);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void CreateNodeRight(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                CurrentNode.LeftId,
+                node.Id,
+                CurrentNode.UpId,
+                CurrentNode.DownId,
+                CurrentNode.FrontId,
+                CurrentNode.BackId);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void CreateNodeUp(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                CurrentNode.LeftId,
+                CurrentNode.RightId,
+                node.Id,
+                CurrentNode.DownId,
+                CurrentNode.FrontId,
+                CurrentNode.BackId);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void CreateNodeDown(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                CurrentNode.LeftId,
+                CurrentNode.RightId,
+                CurrentNode.UpId,
+                node.Id,
+                CurrentNode.FrontId,
+                CurrentNode.BackId);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void CreateNodeFront(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                CurrentNode.LeftId,
+                CurrentNode.RightId,
+                CurrentNode.UpId,
+                CurrentNode.DownId,
+                node.Id,
+                CurrentNode.BackId);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void CreateNodeBack(Node node)
         {
-            
+            CurrentNode = new Node(
+                CurrentNode.Id,
+                CurrentNode.DataId,
+                CurrentNode.LeftId,
+                CurrentNode.RightId,
+                CurrentNode.UpId,
+                CurrentNode.DownId,
+                CurrentNode.FrontId,
+                node.Id);
+            _format.CurrentNode = CurrentNode;
         }
 
         public void DeleteNodeLeft()
