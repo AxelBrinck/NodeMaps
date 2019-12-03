@@ -48,7 +48,7 @@ namespace NodeMaps.Drivers
             _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), sourceId);
             GotoNodeId(finalId);
             _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), intermediateId);
-            GotoNodeId(finalId);
+            GotoNodeId(sourceId);
             _format.SetTargetNodeId(direction, intermediateId);
         }
 
