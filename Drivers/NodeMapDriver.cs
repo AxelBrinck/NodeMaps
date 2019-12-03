@@ -7,6 +7,12 @@ namespace NodeMaps.Drivers
     {
         private readonly INodeMapFormat<T> _format;
 
+        private void Move(long id)
+        {
+            _format.Id = id;
+            CurrentNode = _format.CurrentNode;
+        }
+
         public NodeMapDriver(INodeMapFormat<T> format)
         {
             _format = format;
@@ -18,32 +24,32 @@ namespace NodeMaps.Drivers
 
         public void MoveLeft()
         {
-            
+            Move(CurrentNode.LeftId);
         }
 
         public void MoveRight()
         {
-            
+            Move(CurrentNode.RightId);
         }
 
         public void MoveUp()
         {
-            
+            Move(CurrentNode.UpId);
         }
 
         public void MoveDown()
         {
-            
+            Move(CurrentNode.DownId);
         }
 
         public void MoveFront()
         {
-            
+            Move(CurrentNode.FrontId);
         }
 
         public void MoveBack()
         {
-            
+            Move(CurrentNode.BackId);
         }
 
         public void CreateNodeLeft(Node node)
