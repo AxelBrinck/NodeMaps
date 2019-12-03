@@ -9,8 +9,6 @@ namespace NodeMaps.Formatting.Stream
         protected readonly BinaryReader Reader;
         protected readonly BinaryWriter Writer;
 
-        private long _currentId;
-        
         public StreamNodeMapFormat(System.IO.Stream stream)
         {
             Stream = stream;
@@ -18,13 +16,9 @@ namespace NodeMaps.Formatting.Stream
             Writer = new BinaryWriter(Stream);
         }
         
-        public long Id
-        {
-            get => _currentId;
-            set => _currentId = value;
-        }
+        public long Id { get; set; }
 
-        
+
         public Node CurrentNode
         {
             get => ReadNodeFromAddress(Id);
