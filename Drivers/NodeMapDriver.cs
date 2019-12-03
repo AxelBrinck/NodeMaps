@@ -1,5 +1,4 @@
-﻿using System;
-using NodeMaps.Entities;
+﻿using NodeMaps.Entities;
 using NodeMaps.Formatting;
 
 namespace NodeMaps.Drivers
@@ -7,26 +6,32 @@ namespace NodeMaps.Drivers
     public class NodeMapDriver<T>
     {
         private readonly INodeMapFormat<T> _format;
-        
+
         public NodeMapDriver(INodeMapFormat<T> format)
         {
             _format = format;
             GotoNodeId(0);
         }
 
-        public void GotoNodeId(long nodeId) => _format.GotoNodeId(nodeId);
+        public void GotoNodeId(long nodeId)
+        {
+            _format.GotoNodeId(nodeId);
+        }
 
-        public T GetData() => _format.GetData();
+        public T GetData()
+        {
+            return _format.GetData();
+        }
 
-        public void SetData(T data) => _format.SetData(data);
+        public void SetData(T data)
+        {
+            _format.SetData(data);
+        }
 
         public void Move(Direction direction, bool force = false)
         {
-            if (force && _format.GetTargetNodeId(direction) == -1)
-            {
-                CreateNode(direction);
-            }
-            
+            if (force && _format.GetTargetNodeId(direction) == -1) CreateNode(direction);
+
             _format.GotoNodeId(_format.GetTargetNodeId(direction));
         }
 

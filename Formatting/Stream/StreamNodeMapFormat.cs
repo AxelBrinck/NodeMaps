@@ -5,8 +5,8 @@ namespace NodeMaps.Formatting.Stream
 {
     public abstract class StreamNodeMapFormat<T> : INodeMapFormat<T>
     {
-        protected readonly System.IO.Stream Stream;
         protected readonly BinaryReader Reader;
+        protected readonly System.IO.Stream Stream;
         protected readonly BinaryWriter Writer;
 
         protected StreamNodeMapFormat(System.IO.Stream stream)
@@ -15,7 +15,7 @@ namespace NodeMaps.Formatting.Stream
             Reader = new BinaryReader(Stream);
             Writer = new BinaryWriter(Stream);
         }
-        
+
         public long CurrentId { get; protected set; }
         public abstract void GotoNodeId(long id);
 

@@ -7,10 +7,7 @@ namespace NodeMaps.Formatting.Stream
     {
         public BinaryStreamNodeMapFormat(System.IO.Stream stream) : base(stream)
         {
-            if (Stream.Length == 0)
-            {
-                CreateEmptyNode();
-            }
+            if (Stream.Length == 0) CreateEmptyNode();
         }
 
         public override void GotoNodeId(long id)
