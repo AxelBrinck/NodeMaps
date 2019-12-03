@@ -197,32 +197,56 @@ namespace NodeMaps.Drivers
 
         public void UnlinkLeft()
         {
-            
+            var sourceId = _format.Id;
+            MoveLeft();
+            _format.RightNodeId = -1;
+            _format.Id = sourceId;
+            _format.LeftNodeId = -1;
         }
 
         public void UnlinkRight()
         {
-            
+            var sourceId = _format.Id;
+            MoveRight();
+            _format.LeftNodeId = -1;
+            _format.Id = sourceId;
+            _format.RightNodeId = -1;
         }
         
         public void UnlinkUp()
         {
-            
+            var sourceId = _format.Id;
+            MoveUp();
+            _format.DownNodeId = -1;
+            _format.Id = sourceId;
+            _format.UpNodeId = -1;
         }
 
         public void UnlinkDown()
         {
-            
+            var sourceId = _format.Id;
+            MoveDown();
+            _format.UpNodeId = -1;
+            _format.Id = sourceId;
+            _format.DownNodeId = -1;
         }
 
         public void UnlinkFront()
         {
-            
+            var sourceId = _format.Id;
+            MoveFront();
+            _format.BackNodeId = -1;
+            _format.Id = sourceId;
+            _format.FrontNodeId = -1;
         }
 
         public void UnlinkBack()
         {
-            
+            var sourceId = _format.Id;
+            MoveBack();
+            _format.FrontNodeId = -1;
+            _format.Id = sourceId;
+            _format.BackNodeId = -1;
         }
     }
 }
