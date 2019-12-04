@@ -1,4 +1,5 @@
-﻿using NodeMaps.Entities;
+﻿using System;
+using NodeMaps.Entities;
 using NodeMaps.Formatting;
 
 namespace NodeMaps.Drivers
@@ -42,6 +43,23 @@ namespace NodeMaps.Drivers
             _format.SetTargetNodeId(DirectionTools.GetOpposite(direction), sourceId);
             GotoNodeId(sourceId);
             _format.SetTargetNodeId(direction, createdId);
+        }
+
+        public void DeleteNode(Direction direction)
+        {
+            var source = _format.CurrentId;
+            Move(direction);
+            foreach (Direction subDirection in Enum.GetValues(typeof(Direction)))
+            {
+                if (_format.GetTargetNodeId(subDirection) == -1) continue;
+                var subSource = _format.CurrentId;
+                Move(subDirection);
+                _format.SetTargetNodeId(DirectionTools.GetOpposite(subDirection), -1);
+                _format.GotoNodeId(subSource);
+                _format.SetTargetNodeId(subDirection, -1);
+            }
+            _format.GotoNodeId(source);
+            _format.SetTargetNodeId(direction, -1);
         }
 
         public void IntercalateNewNode(Direction direction)
