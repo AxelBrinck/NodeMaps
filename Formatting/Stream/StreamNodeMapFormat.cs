@@ -3,6 +3,10 @@ using NodeMaps.Entities;
 
 namespace NodeMaps.Formatting.Stream
 {
+    /// <summary>
+    /// A base class defining what every stream format must implement.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class StreamNodeMapFormat<T> : INodeMapFormat<T>
     {
         protected readonly BinaryReader Reader;
