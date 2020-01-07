@@ -21,6 +21,7 @@ namespace NodeMaps.Formatting.Stream
         }
 
         public long CurrentId { get; protected set; }
+        
         public abstract void GotoNodeId(long id);
 
         public abstract T GetData();
