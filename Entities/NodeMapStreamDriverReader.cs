@@ -6,48 +6,47 @@ namespace NodeMaps.Entities
     {
         private readonly BinaryReader _streamReader;
 
-        public long HeaderAddress => _streamReader.BaseStream.Position;
+        public long HeaderPosition => _streamReader.BaseStream.Position;
 
         public NodeMapStreamReader(Stream streamBase)
         {
             _streamReader = new BinaryReader(streamBase);
         }
 
-        public long GetDataAddress()
+        public DataAddress GetDataAddress()
         {
-            var headerAddress = HeaderAddress;
+            var headerAddress = HeaderPosition;
             var dataAddress = _streamReader.ReadInt64();
             _streamReader.BaseStream.Position = headerAddress;
-            return dataAddress;
+            return new DataAddress(HeaderPosition, dataAddress);
         }
 
-        public int GetReferenceCount()
+        public ReferenceCount GetReferenceCount()
         {
-            var headerAddress = HeaderAddress;
+            var headerAddress = HeaderPosition;
             _streamReader.BaseStream.Seek(sizeof(long), SeekOrigin.Current);
             var referenceCount = _streamReader.ReadInt32();
             _streamReader.BaseStream.Position = headerAddress;
-            return referenceCount;
+            return new ReferenceCount(HeaderPosition, referenceCount);
         }
 
-        public long GetReferenceAddress(int slot)
+        public ReferenceAddress GetReferenceAddress(int slot)
         {
-            var headerAddress = HeaderAddress;
+            var headerAddress = HeaderPosition;
             _streamReader.BaseStream.Seek(sizeof(long) + sizeof(int) * slot, SeekOrigin.Current);
-            var referenceAddress = _streamReader.ReadInt64();
+            var referenceStreamPosition = _streamReader.ReadInt64();
             _streamReader.BaseStream.Position = headerAddress;
-            return referenceAddress;
+            return new ReferenceAddress(HeaderPosition, referenceStreamPosition);
         }
 
-        public byte[] GetData()
+        public NodeData GetData(DataAddress dataAddress)
         {
-            var headerAddress = HeaderAddress;
-            var dataAddress = _streamReader.ReadInt64();
-            _streamReader.BaseStream.Position = dataAddress;
+            var headerAddress = HeaderPosition;
+            _streamReader.BaseStream.Position = dataAddress.DataStreamPosition;
             var dataLength = _streamReader.ReadInt32();
             var data = _streamReader.ReadBytes(dataLength);
             _streamReader.BaseStream.Position = headerAddress;
-            return data;
+            return new NodeData(headerAddress, data);
         }
     }
 }
