@@ -1,13 +1,11 @@
 ﻿namespace NodeMaps.Entities
 {
-    public class ReferenceAddress
+    public class NodeMapReferenceAddress : NodeSignature
     {
-        public long HeaderStreamPosition { get; }
         public long ReferenceStreamPosition { get; }
 
-        internal ReferenceAddress(long headerStreamPosition, long referenceStreamPosition)
+        internal NodeMapReferenceAddress(long headerStreamPosition, long referenceStreamPosition) : base(headerStreamPosition)
         {
-            HeaderStreamPosition = headerStreamPosition;
             ReferenceStreamPosition = referenceStreamPosition;
         }
     }

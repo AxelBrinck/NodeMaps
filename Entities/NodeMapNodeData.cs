@@ -1,14 +1,12 @@
 ﻿namespace NodeMaps.Entities
 {
-    public class NodeData
+    public class NodeMapNodeData : NodeSignature
     {
-        public long HeaderStreamPosition { get; }
-        public byte[] Data { get; }
+        public byte[] NodeData { get; }
 
-        public NodeData(long headerStreamPosition, byte[] data)
+        public NodeMapNodeData(long headerStreamPosition, byte[] nodeData) : base(headerStreamPosition)
         {
-            HeaderStreamPosition = headerStreamPosition;
-            Data = data;
+            NodeData = nodeData;
         }
     }
 }

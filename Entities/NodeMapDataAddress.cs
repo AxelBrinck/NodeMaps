@@ -1,13 +1,11 @@
 ﻿namespace NodeMaps.Entities
 {
-    public class DataAddress
+    public class NodeMapDataAddress : NodeSignature
     {
-        public long HeaderStreamPosition { get; }
         public long DataStreamPosition { get; }
 
-        internal DataAddress(long headerStreamPosition, long dataStreamPosition)
+        internal NodeMapDataAddress(long headerStreamPosition, long dataStreamPosition) : base(headerStreamPosition)
         {
-            HeaderStreamPosition = headerStreamPosition;
             DataStreamPosition = dataStreamPosition;
         }
     }

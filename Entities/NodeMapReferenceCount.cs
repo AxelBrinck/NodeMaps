@@ -1,14 +1,12 @@
 ﻿namespace NodeMaps.Entities
 {
-    public class ReferenceCount
+    public class NodeMapReferenceCount : NodeSignature
     {
-        public long HeaderStreamPosition { get; }
-        public int Count { get; }
+        public int ReferenceCount { get; }
         
-        internal ReferenceCount(long headerStreamPosition, int count)
+        internal NodeMapReferenceCount(long headerStreamPosition, int referenceCount) : base(headerStreamPosition)
         {
-            HeaderStreamPosition = headerStreamPosition;
-            Count = count;
+            ReferenceCount = referenceCount;
         }
     }
 }
