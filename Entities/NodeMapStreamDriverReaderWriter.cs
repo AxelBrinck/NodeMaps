@@ -4,11 +4,11 @@ namespace NodeMaps.Entities
 {
     public class NodeMapStreamReaderWriter : NodeMapStreamReader
     {
-        protected readonly StreamWriter StreamWriter;
+        private readonly StreamWriter _streamWriter;
         
-        public NodeMapStreamReaderWriter(Stream stream) : base(stream)
+        public NodeMapStreamReaderWriter(Stream streamBase) : base(streamBase)
         {
-            StreamWriter = new StreamWriter(stream);
+            _streamWriter = new StreamWriter(streamBase);
         }
     }
 }

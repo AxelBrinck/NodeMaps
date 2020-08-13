@@ -1,14 +1,15 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace NodeMaps.Entities
 {
-    public class NodeMapStreamReader : NodeMapStreamBase
+    public class NodeMapStreamReader
     {
-        protected readonly BinaryReader StreamReader;
-        
-        public NodeMapStreamReader(Stream stream) : base(stream)
+        private readonly BinaryReader _streamReader;
+
+        public NodeMapStreamReader(Stream streamBase)
         {
-            StreamReader = new BinaryReader(stream);
+            _streamReader = new BinaryReader(streamBase);
         }
     }
 }
