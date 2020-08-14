@@ -4,7 +4,7 @@
     {
         public int ReferenceCount { get; }
         
-        internal NodeMapReferenceCount(long headerStreamPosition, int referenceCount) : base(headerStreamPosition)
+        internal NodeMapReferenceCount(NodeMapHeaderAddress headerStreamPosition, int referenceCount) : base(headerStreamPosition)
         {
             ReferenceCount = referenceCount;
         }

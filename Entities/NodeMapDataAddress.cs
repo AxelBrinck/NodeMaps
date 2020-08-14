@@ -4,7 +4,7 @@
     {
         public long DataStreamPosition { get; }
 
-        internal NodeMapDataAddress(long headerStreamPosition, long dataStreamPosition) : base(headerStreamPosition)
+        internal NodeMapDataAddress(NodeMapHeaderAddress headerStreamPosition, long dataStreamPosition) : base(headerStreamPosition)
         {
             DataStreamPosition = dataStreamPosition;
         }

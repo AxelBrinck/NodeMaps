@@ -4,7 +4,7 @@
     {
         public long ReferenceStreamPosition { get; }
 
-        internal NodeMapReferenceAddress(long headerStreamPosition, long referenceStreamPosition) : base(headerStreamPosition)
+        internal NodeMapReferenceAddress(NodeMapHeaderAddress headerStreamPosition, long referenceStreamPosition) : base(headerStreamPosition)
         {
             ReferenceStreamPosition = referenceStreamPosition;
         }

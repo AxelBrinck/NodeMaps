@@ -4,7 +4,7 @@
     {
         public byte[] NodeData { get; }
 
-        internal NodeMapNodeData(long headerStreamPosition, byte[] nodeData) : base(headerStreamPosition)
+        internal NodeMapNodeData(NodeMapHeaderAddress headerStreamPosition, byte[] nodeData) : base(headerStreamPosition)
         {
             NodeData = nodeData;
         }

@@ -2,9 +2,9 @@
 {
     public abstract class NodeSignature
     {
-        public long HeaderAddress { get; }
+        public NodeMapHeaderAddress HeaderAddress { get; }
 
-        internal NodeSignature(long headerAddress)
+        internal NodeSignature(NodeMapHeaderAddress headerAddress)
         {
             HeaderAddress = headerAddress;
         }
