@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace NodeMaps.Entities
 {
@@ -7,27 +6,16 @@ namespace NodeMaps.Entities
     {
         private readonly StreamWriter _streamWriter;
         
-        public NodeMapStreamReaderWriter(Stream streamBase) : base(streamBase)
+        public NodeMapStreamReaderWriter(Stream stream) : base(stream)
         {
-            _streamWriter = new StreamWriter(streamBase);
+            _streamWriter = new StreamWriter(stream);
         }
 
-        public void Initialize(int referenceCount)
+        public long CreateHeader(int referenceCount)
         {
-            if (_streamWriter.BaseStream.Length > 0) 
-                throw new Exception("Cannot initialize a non-empty stream.");
-
-            WriteEmptyHeader(new NodeMapReferenceAddress(new NodeMapHeaderAddress(0), 0), referenceCount);
-        }
-
-        public void Create(NodeMapReferenceAddress address, int referenceCount)
-        {
-            WriteEmptyHeader(address, referenceCount);
-        }
-
-        private void WriteEmptyHeader(NodeMapReferenceAddress address, int referenceCount)
-        {
-            _streamWriter.BaseStream.Position = address.ReferenceStreamPosition;
+            var headerAddress = _streamWriter.BaseStream.Length;
+            
+            _streamWriter.BaseStream.Position = headerAddress;
             
             _streamWriter.Write((long) -1);
             _streamWriter.Write(referenceCount);
@@ -35,7 +23,7 @@ namespace NodeMaps.Entities
             for (var i = 0; i < referenceCount; i++)
                 _streamWriter.Write((long) -1);
 
-            _streamWriter.BaseStream.Position = 0;
+            return headerAddress;
         }
     }
 }

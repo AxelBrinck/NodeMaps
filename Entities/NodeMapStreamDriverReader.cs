@@ -6,47 +6,35 @@ namespace NodeMaps.Entities
     {
         private readonly BinaryReader _streamReader;
 
-        public NodeMapHeaderAddress HeaderAddress => new NodeMapHeaderAddress(_streamReader.BaseStream.Position);
-
-        public NodeMapStreamReader(Stream streamBase)
+        public NodeMapStreamReader(Stream stream)
         {
-            _streamReader = new BinaryReader(streamBase);
+            _streamReader = new BinaryReader(stream);
         }
 
-        public NodeMapDataAddress GetDataAddress()
+        public long GetDataAddress(long headerStreamPosition)
         {
-            var headerAddress = HeaderAddress;
-            var dataAddress = _streamReader.ReadInt64();
-            _streamReader.BaseStream.Position = headerAddress.HeaderAddress;
-            return new NodeMapDataAddress(HeaderAddress, dataAddress);
+            _streamReader.BaseStream.Position = headerStreamPosition;
+            return _streamReader.ReadInt64();
         }
 
-        public NodeMapReferenceCount GetReferenceCount()
+        public int GetSlotCount(long headerStreamPosition)
         {
-            var headerAddress = HeaderAddress;
+            _streamReader.BaseStream.Position = headerStreamPosition;
             _streamReader.BaseStream.Seek(sizeof(long), SeekOrigin.Current);
-            var referenceCount = _streamReader.ReadInt32();
-            _streamReader.BaseStream.Position = headerAddress.HeaderAddress;
-            return new NodeMapReferenceCount(HeaderAddress, referenceCount);
+            return _streamReader.ReadInt32();
         }
 
-        public NodeMapReferenceAddress GetReferenceAddress(int slot)
+        public long GetSlotValue(long headerStreamPosition, int slot)
         {
-            var headerAddress = HeaderAddress;
-            _streamReader.BaseStream.Seek(sizeof(long) + sizeof(int) * slot, SeekOrigin.Current);
-            var referenceStreamPosition = _streamReader.ReadInt64();
-            _streamReader.BaseStream.Position = headerAddress.HeaderAddress;
-            return new NodeMapReferenceAddress(HeaderAddress, referenceStreamPosition);
+            _streamReader.BaseStream.Position = headerStreamPosition;
+            _streamReader.BaseStream.Seek(sizeof(long) + sizeof(int) + sizeof(int) * slot, SeekOrigin.Current);
+            return _streamReader.ReadInt64();
         }
 
-        public NodeMapNodeData GetData(NodeMapDataAddress nodeMapDataAddress)
+        public byte[] GetData(long dataAddress)
         {
-            var headerAddress = HeaderAddress;
-            _streamReader.BaseStream.Position = nodeMapDataAddress.DataStreamPosition;
-            var dataLength = _streamReader.ReadInt32();
-            var data = _streamReader.ReadBytes(dataLength);
-            _streamReader.BaseStream.Position = headerAddress.HeaderAddress;
-            return new NodeMapNodeData(HeaderAddress, data);
+            _streamReader.BaseStream.Position = dataAddress;
+            return _streamReader.ReadBytes(_streamReader.ReadInt32());
         }
     }
 }
