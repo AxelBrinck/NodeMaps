@@ -9,11 +9,11 @@ namespace NodeMaps.Entities.Data
     /// This signature is a byte and it will pre-fix every block in a stream.
     /// When decoding, if the first byte doesnt match the signature: Incorrect block type to read, data corruption.
     /// </summary>
-    public abstract class StreamByteBlock
+    public abstract class Block
     {
         private byte Signature { get; }
 
-        public StreamByteBlock(byte signature)
+        public Block(byte signature)
         {
             Signature = signature;
         }

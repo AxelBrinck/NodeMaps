@@ -5,7 +5,7 @@ namespace NodeMaps.Entities.Data
     /// <summary>
     /// This block represents an index entry in a stream.
     /// </summary>
-    public class DataStreamByteBlock : StreamByteBlock
+    public class DataBlock : Block
     {
         private const byte Identifier = 101;
         

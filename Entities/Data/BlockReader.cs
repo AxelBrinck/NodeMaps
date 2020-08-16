@@ -24,7 +24,7 @@ namespace NodeMaps.Entities.Data
         /// <param name="position">The position in the stream to seek.</param>
         /// <typeparam name="TBlock">The type of block to read.</typeparam>
         /// <returns>Returns a block with the data decoded or deserialized from the stream.</returns>
-        public TBlock ReadBlock<TBlock>(long position) where TBlock : StreamByteBlock, new()
+        public TBlock ReadBlock<TBlock>(long position) where TBlock : Block, new()
         {
             _reader.BaseStream.Position = position;
             var block = new TBlock();

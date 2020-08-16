@@ -5,7 +5,7 @@ namespace NodeMaps.Entities.Data
     /// <summary>
     /// This block represents a data entry in a stream.
     /// </summary>
-    public class GateStreamByteBlock : StreamByteBlock
+    public class GateBlock : Block
     {
         private const byte Identifier = 100;
         

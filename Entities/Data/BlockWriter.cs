@@ -24,7 +24,7 @@ namespace NodeMaps.Entities.Data
         /// <param name="position">The stream position to write.</param>
         /// <param name="block">The instance of block to write.</param>
         /// <typeparam name="TBlock">The type of the provided block.</typeparam>
-        public void WriteBlock<TBlock>(long position, TBlock block) where TBlock : StreamByteBlock
+        public void WriteBlock<TBlock>(long position, TBlock block) where TBlock : Block
         {
             _writer.BaseStream.Position = position;
             block.Encode(_writer);
