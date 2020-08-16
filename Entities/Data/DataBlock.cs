@@ -23,6 +23,6 @@ namespace NodeMaps.Entities.Data
             Data = reader.ReadBytes(length);
         }
 
-        public DataStreamByteBlock() : base(Identifier) { }
+        public DataBlock() : base(Identifier) { }
     }
 }

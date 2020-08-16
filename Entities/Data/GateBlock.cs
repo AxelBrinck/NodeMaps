@@ -33,6 +33,6 @@ namespace NodeMaps.Entities.Data
             }
         }
 
-        public GateStreamByteBlock() : base(Identifier) { }
+        public GateBlock() : base(Identifier) { }
     }
 }
