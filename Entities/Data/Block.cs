@@ -11,7 +11,7 @@ namespace NodeMaps.Entities.Data
     /// </summary>
     public abstract class StreamByteBlock
     {
-        protected byte Signature { get; }
+        private byte Signature { get; }
 
         public StreamByteBlock(byte signature)
         {
