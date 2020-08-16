@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NodeMaps.Entities
+namespace NodeMaps.Entities.Data
 {
     /// <summary>
     /// Reads stream blocks from a given stream and position.
