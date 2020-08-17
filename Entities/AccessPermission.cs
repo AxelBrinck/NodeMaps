@@ -1,9 +1,9 @@
 ﻿namespace NodeMaps.Entities
 {
     /// <summary>
-    /// This will set a navigation mode for traversing nodes with the <see cref="NodeOperations"/> object.
+    /// This will set a navigation mode for traversing nodes with the <see cref="NodeMapManager"/> object.
     /// </summary>
-    public enum NavigationMode
+    public enum AccessPermission
     {
         /// <summary>
         /// Will only enable reading without any modification capability.
