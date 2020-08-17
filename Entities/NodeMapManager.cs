@@ -6,12 +6,11 @@ namespace NodeMaps.Entities
     /// <summary>
     /// This will hold the available node operations.
     /// </summary>
-    [Obsolete]
-    public class NodeOperations
+    public class NodeMapManager
     {
         private readonly ReadingOperations _readingOperations;
         private readonly WritingOperations _writingOperations;
-        private readonly NavigationMode _mode;
+        private readonly AccessPermission _mode;
 
         public long CurrentPosition { get; set; }
 
@@ -20,7 +19,7 @@ namespace NodeMaps.Entities
         /// </summary>
         /// <param name="stream">The stream to navigate through.</param>
         /// <param name="mode">The navigation mode to apply.</param>
-        public NodeOperations(Stream stream, NavigationMode mode)
+        public NodeMapManager(Stream stream, AccessPermission mode)
         {
             _readingOperations = new ReadingOperations(stream);
             _writingOperations = new WritingOperations(stream);
