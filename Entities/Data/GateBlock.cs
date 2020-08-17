@@ -34,5 +34,10 @@ namespace NodeMaps.Entities.Data
         }
 
         public GateBlock() : base(Identifier) { }
+
+        public GateBlock(long[] gates) : base(Identifier)
+        {
+            Gates = gates;
+        }
     }
 }

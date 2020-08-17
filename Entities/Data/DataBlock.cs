@@ -11,6 +11,7 @@ namespace NodeMaps.Entities.Data
         
         public byte[] Data { get; set; }
 
+
         protected override void EncodeProcedure(BinaryWriter writer)
         {
             writer.Write(Data.Length);
@@ -24,5 +25,10 @@ namespace NodeMaps.Entities.Data
         }
 
         public DataBlock() : base(Identifier) { }
+
+        public DataBlock(byte[] data) : base(Identifier)
+        {
+            Data = data;
+        }
     }
 }
