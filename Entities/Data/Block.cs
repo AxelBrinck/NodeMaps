@@ -31,7 +31,7 @@ namespace NodeMaps.Entities.Data
         public void Decode(BinaryReader reader)
         {
             var identifier = reader.ReadByte();
-            if (identifier != Signature) throw new Exception("Block signature not valid.");
+            if (identifier != Signature) throw new Exception("Block signature is not valid.");
 
             DecodeProcedure(reader);
         }
