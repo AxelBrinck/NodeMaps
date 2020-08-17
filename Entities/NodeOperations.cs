@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace NodeMaps.Entities
 {
     /// <summary>
     /// This will hold the available node operations.
     /// </summary>
+    [Obsolete]
     public class NodeOperations
     {
         private readonly ReadingOperations _readingOperations;
