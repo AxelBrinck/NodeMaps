@@ -21,14 +21,14 @@ namespace NodeMaps.Entities.Data.Block
         protected abstract void EncodeProcedure(BinaryWriter writer);
         protected abstract void DecodeProcedure(BinaryReader reader);
         
-        public void Encode(BinaryWriter writer)
+        public void EncodeToStream(BinaryWriter writer)
         {
             writer.Write(Signature);
             
             EncodeProcedure(writer);
         }
 
-        public void Decode(BinaryReader reader)
+        public void DecodeFromStream(BinaryReader reader)
         {
             var identifier = reader.ReadByte();
             if (identifier != Signature) throw new Exception("Block signature is not valid.");

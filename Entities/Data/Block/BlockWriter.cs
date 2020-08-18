@@ -27,7 +27,7 @@ namespace NodeMaps.Entities.Data.Block
         public void WriteBlock<TBlock>(long position, TBlock block) where TBlock : Block
         {
             _targetStream.BaseStream.Position = position;
-            block.Encode(_targetStream);
+            block.EncodeToStream(_targetStream);
         }
     }
 }

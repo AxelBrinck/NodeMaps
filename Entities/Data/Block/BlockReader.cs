@@ -28,7 +28,7 @@ namespace NodeMaps.Entities.Data.Block
         {
             _sourceStream.BaseStream.Position = position;
             var block = new TBlock();
-            block.Decode(_sourceStream);
+            block.DecodeFromStream(_sourceStream);
             return block;
         }
     }
