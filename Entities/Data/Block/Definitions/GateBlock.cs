@@ -3,7 +3,10 @@
 namespace NodeMaps.Entities.Data.Block.Definitions
 {
     /// <summary>
-    /// This block represents a data entry in a stream.
+    /// This block represents an index entry in a stream.
+    /// Structure:
+    ///     -Integer16: The number of Integer64 values included in the index entry.
+    ///     -Integer64[]: The array of indexes itself.
     /// </summary>
     public class GateBlock : Block
     {

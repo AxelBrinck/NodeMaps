@@ -3,7 +3,10 @@
 namespace NodeMaps.Entities.Data.Block.Definitions
 {
     /// <summary>
-    /// This block represents an index entry in a stream.
+    /// This block represents a byte[] entry in a stream.
+    /// Structure:
+    ///     -Integer32: The number of bytes the byte array has.
+    ///     -Byte[]: The byte array itself.
     /// </summary>
     public class DataBlock : Block
     {
