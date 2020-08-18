@@ -13,7 +13,7 @@ namespace NodeMaps.Entities.Data.Block
     {
         private byte Signature { get; }
 
-        public Block(byte signature)
+        protected Block(byte signature)
         {
             Signature = signature;
         }
