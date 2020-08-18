@@ -13,6 +13,10 @@ namespace NodeMaps.Entities.Data.Block
     {
         private byte Signature { get; }
 
+        /// <summary>
+        /// Instantiates the block by providing an identifier.
+        /// </summary>
+        /// <param name="signature">The identifier to assign to this block type.</param>
         protected Block(byte signature)
         {
             Signature = signature;
@@ -21,6 +25,10 @@ namespace NodeMaps.Entities.Data.Block
         protected abstract void EncodeProcedure(BinaryWriter writer);
         protected abstract void DecodeProcedure(BinaryReader reader);
         
+        /// <summary>
+        /// Writes to a stream the block.
+        /// </summary>
+        /// <param name="writer">The stream to write.</param>
         public void EncodeToStream(BinaryWriter writer)
         {
             writer.Write(Signature);
@@ -28,6 +36,11 @@ namespace NodeMaps.Entities.Data.Block
             EncodeProcedure(writer);
         }
 
+        /// <summary>
+        /// Reads from a given stream the block.
+        /// </summary>
+        /// <param name="reader">The stream to read.</param>
+        /// <exception cref="Exception">Throws exception when the stream doesnt contain a valid block.</exception>
         public void DecodeFromStream(BinaryReader reader)
         {
             var identifier = reader.ReadByte();
