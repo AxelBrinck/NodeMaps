@@ -18,9 +18,9 @@ namespace NodeMaps.Entities.Data.Block.Definitions
         {
             writer.Write((short) Gates.Length);
 
-            foreach (var l in Gates)
+            foreach (var gate in Gates)
             {
-                writer.Write(l);
+                writer.Write(gate);
             }
         }
 
