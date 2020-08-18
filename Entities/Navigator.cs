@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using NodeMaps.Entities.Data;
+using NodeMaps.Entities.Data.Block.Definitions;
 
 namespace NodeMaps.Entities
 {

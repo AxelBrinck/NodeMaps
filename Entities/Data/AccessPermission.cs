@@ -1,4 +1,4 @@
-﻿namespace NodeMaps.Entities
+﻿namespace NodeMaps.Entities.Data
 {
     /// <summary>
     /// This will set a navigation mode for traversing nodes with the <see cref="NodeMapManager"/> object.

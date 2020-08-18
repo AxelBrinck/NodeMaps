@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace NodeMaps.Entities.Data
+namespace NodeMaps.Entities.Data.Block
 {
     /// <summary>
     /// This is the abstraction that will need to be implemented by every block.

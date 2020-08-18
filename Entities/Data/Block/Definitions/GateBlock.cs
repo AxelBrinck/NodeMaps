@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NodeMaps.Entities.Data
+namespace NodeMaps.Entities.Data.Block.Definitions
 {
     /// <summary>
     /// This block represents a data entry in a stream.

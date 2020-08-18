@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NodeMaps.Entities.Data
+namespace NodeMaps.Entities.Data.Block
 {
     /// <summary>
     /// Writes blocks to a stream in a specified position.
