@@ -7,7 +7,7 @@ namespace NodeMaps.Entities.Data.Block
     /// </summary>
     public class BlockReader
     {
-        private readonly BinaryReader _reader;
+        private readonly BinaryReader _sourceStream;
         
         /// <summary>
         /// Instantiates the reader by providing a stream to read.
@@ -15,7 +15,7 @@ namespace NodeMaps.Entities.Data.Block
         /// <param name="stream">The stream to read</param>
         public BlockReader(Stream stream)
         {
-            _reader = new BinaryReader(stream);
+            _sourceStream = new BinaryReader(stream);
         }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace NodeMaps.Entities.Data.Block
         /// <returns>Returns a block with the data decoded or deserialized from the stream.</returns>
         public TBlock ReadBlock<TBlock>(long position) where TBlock : Block, new()
         {
-            _reader.BaseStream.Position = position;
+            _sourceStream.BaseStream.Position = position;
             var block = new TBlock();
-            block.Decode(_reader);
+            block.Decode(_sourceStream);
             return block;
         }
     }

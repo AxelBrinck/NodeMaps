@@ -7,7 +7,7 @@ namespace NodeMaps.Entities.Data.Block
     /// </summary>
     public class BlockWriter
     {
-        private readonly BinaryWriter _writer;
+        private readonly BinaryWriter _targetStream;
         
         /// <summary>
         /// Instantiates the writer by providing a stream to write.
@@ -15,7 +15,7 @@ namespace NodeMaps.Entities.Data.Block
         /// <param name="stream"></param>
         public BlockWriter(Stream stream)
         {
-            _writer = new BinaryWriter(stream);
+            _targetStream = new BinaryWriter(stream);
         }
 
         /// <summary>
@@ -26,8 +26,8 @@ namespace NodeMaps.Entities.Data.Block
         /// <typeparam name="TBlock">The type of the provided block.</typeparam>
         public void WriteBlock<TBlock>(long position, TBlock block) where TBlock : Block
         {
-            _writer.BaseStream.Position = position;
-            block.Encode(_writer);
+            _targetStream.BaseStream.Position = position;
+            block.Encode(_targetStream);
         }
     }
 }
