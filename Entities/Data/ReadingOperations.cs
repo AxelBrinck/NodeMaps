@@ -40,5 +40,15 @@ namespace NodeMaps.Entities.Data
         {
             return _reader.ReadBlock<GateBlock>(position);
         }
+
+        /// <summary>
+        /// Reads a node block from the specified stream position.
+        /// </summary>
+        /// <param name="position">The stream position to read the node block.</param>
+        /// <returns>The gathered node block from the stream.</returns>
+        public NodeBlock ReadNodeBlock(long position)
+        {
+            return _reader.ReadBlock<NodeBlock>(position);
+        }
     }
 }

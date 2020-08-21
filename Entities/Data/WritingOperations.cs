@@ -40,5 +40,15 @@ namespace NodeMaps.Entities.Data
         {
             _writer.WriteBlock(position, gateBlock);
         }
+
+        /// <summary>
+        /// Writes a node block to the specified stream position.
+        /// </summary>
+        /// <param name="position">The stream position to write the node block.</param>
+        /// <param name="nodeBlock">The node block to write to the stream.</param>
+        public void WriteNodeBlock(long position, NodeBlock nodeBlock)
+        {
+            _writer.WriteBlock(position, nodeBlock);
+        }
     }
 }
